@@ -88,7 +88,7 @@ class FPTree:
 		ptr.count+=1
 	
 	def get_conditional_fp_tree(self,suffix):
-		
+		pass
 
 	def dot(self):
 		node_id = 1
