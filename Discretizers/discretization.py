@@ -26,18 +26,6 @@ names = ["Nearest Neighbors", "Linear SVM", "RBF SVM", "Gaussian Process",
          "Decision Tree", "Random Forest", "Neural Net", "AdaBoost",
          "Naive Bayes", "QDA"]
 
-classifiers = [
-    KNeighborsClassifier(3),
-    SVC(kernel="linear", C=0.025),
-    SVC(gamma=2, C=1),
-    GaussianProcessClassifier(1.0 * RBF(1.0)),
-    DecisionTreeClassifier(max_depth=5),
-    RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
-    MLPClassifier(alpha=1, max_iter=1000),
-    AdaBoostClassifier(),
-    GaussianNB(),
-    QuadraticDiscriminantAnalysis()]
-
 X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
                            random_state=1, n_clusters_per_class=1)
 rng = np.random.RandomState(2)
@@ -58,10 +46,22 @@ for strategy in ["no_buckets","uniform","quantile"]:
         for bin_2 in range(5,11):
             figure = plt.figure(figsize=(27, 9))
             i = 1
+            classifiers = [
+                KNeighborsClassifier(3),
+                SVC(kernel="linear", C=0.025),
+                SVC(gamma=2, C=1),
+                GaussianProcessClassifier(1.0 * RBF(1.0)),
+                DecisionTreeClassifier(max_depth=5),
+                RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+                MLPClassifier(alpha=1, max_iter=1000),
+                AdaBoostClassifier(),
+                GaussianNB(),
+                QuadraticDiscriminantAnalysis()]
+
             for ds_cnt, ds in enumerate(datasets):
                 X, y = ds
                 if strategy != "no_buckets":
-                    est = KBinsDiscretizer(n_bins=[5, 5], encode='ordinal',strategy=strategy).fit(X)
+                    est = KBinsDiscretizer(n_bins=[bin_1, bin_2], encode='ordinal',strategy=strategy).fit(X)
                     X = est.transform(X)
                 X_train, X_test, y_train, y_test = \
                     train_test_split(X, y, test_size=.4, random_state=42)
