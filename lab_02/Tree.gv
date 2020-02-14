@@ -1,0 +1,22 @@
+// FP Tree
+digraph {
+	0 [label="outlook 0.1696"]
+	node [shape=box]
+	1 [label="yes(0.6000)"]
+	node [shape=ellipse]
+	0 -> 1 [label=sunny]
+	node [shape=box]
+	2 [label="yes(1.0000)"]
+	node [shape=ellipse]
+	0 -> 2 [label=overcast]
+	3 [label="windy 0.9710"]
+	node [shape=box]
+	4 [label="yes(1.0000)"]
+	node [shape=ellipse]
+	3 -> 4 [label=false]
+	node [shape=box]
+	5 [label="no(1.0000)"]
+	node [shape=ellipse]
+	3 -> 5 [label=true]
+	0 -> 3 [label=rainy]
+}
